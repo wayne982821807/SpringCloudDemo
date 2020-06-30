@@ -1,5 +1,6 @@
 package com.redissonlock.lock.controller;
 
+import com.redissonlock.lock.common.aop.HttpLog;
 import com.redissonlock.lock.service.AquiredLockWorker;
 import com.redissonlock.lock.service.impl.RedisLocker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,9 @@ import java.util.concurrent.CountDownLatch;
 public class RedissonLockBaseController {
     @Autowired
     RedisLocker distributedLocker;
+
     @RequestMapping(value = "/redlock")
+    @HttpLog
     public String testRedlock() throws Exception{
 
         CountDownLatch startSignal = new CountDownLatch(1);
